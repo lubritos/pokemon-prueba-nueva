@@ -5,9 +5,10 @@ import App from "./App";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
+const strictMode = process.env.NODE_ENV === 'production';
 
 root.render(
-  <StrictMode>
+  (strictMode && <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>) || <App />
 );
