@@ -8,10 +8,11 @@
 }
 .fire {
   background: #FB6C6C url('./assets/images/fire.png') no-repeat bottom right!important;
-  background-size: 160px 160px !important;
+  background-size: 175px 175px !important;
 }
 .poison {
-  background-color: #152ecef1!important;
+  background: #152ecef1 url('./assets/images/poison.png') no-repeat bottom right!important;
+  background-size: 175px 175px !important;
 }
 .grass {
   background: #48D0B0 url('./assets/images/leaf.png') no-repeat bottom right!important;
@@ -24,10 +25,12 @@
   background-color: #455a64!important;
 }
 .normal {
-  background-color: #b0bec5!important;
+  background:#b0bec5 url('./assets/images/normal.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .bug {
-  background-color: #96D47F!important;
+  background:#96D47F url('./assets/images/bug.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .electric {
   background: #FFD86F url('./assets/images/light.png') no-repeat bottom right!important;
@@ -46,19 +49,22 @@
   background-color: #e1bee7 !important;
 }
 .fighting {
-  background-color: #bcaaa4 !important;
+  background:#bcaaa4 url('./assets/images/box.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .ground {
   background-color: #8d6e63 !important;
 }
 .dragon {
-  background-color: #e64a19 !important;
+  background:#e64a19 url('./assets/images/dragon.png') no-repeat bottom right  !important;
+  background-size: 175px 175px !important;
 }
 .steel {
   background-color: #78909c !important;
 }
 .psychic {
-  background-color: #ffca28 !important;
+  background:#ffca28 url('./assets/images/psychi.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .ghost {
   background-color: #607d8b !important;
@@ -89,4 +95,22 @@
 }
 a {
   text-decoration: none !important;
+}
+.Mui-selected {
+  color: #ffffff !important;
+  background-color: rgb(241 14 14) !important;
+  border-color: black !important;
+  border-radius: 15px !important;
+  border: double !important;
+}
+.m-2 {
+  margin: 2rem !important;
+}
+
+.mb-2{
+  margin-bottom: 2rem;
+}
+.btnCategoria{
+  display: flex;
+  justify-content: center !important;
 }

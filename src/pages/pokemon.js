@@ -12,8 +12,29 @@ const Title = styled.h1`
   justifi-content:start;
   margin:2rem;
 `
+const tipos = [
+  'todos',
+  'normal',
+  'dark',
+  'dragon',
+  'fire',
+  'water',
+  'electric',
+  'grass',
+  'poison',
+  'flying',
+  'fighting',
+  'ground',
+  'bug',
+  'rock',
+  'ice',
+  'ghost',
+  'steel'
 
-const existPokemon = [];
+
+] 
+
+let existPokemon = [];
 const Pokemon = () => {
   const storePokes = localStorage.getItem('pokePaginado');
   const [pokemons, setPokemons] = useState([]);
@@ -24,16 +45,38 @@ const Pokemon = () => {
 
   async function getPokemon() {
     const response = await apiPokemonsKalos.get();
-    return response.data;
+    return await cleanDuplicate(response.data);
+  }
+  function cleanDuplicate(pokemons) {
+    let pokes2 = [];
+    for(let poke of pokemons) {
+      if (!existPokemon.some((po) => po === poke.name)) {
+        pokes2.push(poke)
+        existPokemon.push(poke.name);
+      }
+    }
+    existPokemon = [];
+    return pokes2;
+  }
+
+  async function filtroPokemon(tipos) {
+    let pokeFilter;
+    if (tipos !== 'todos' ) {
+      pokeFilter = pokemons.filter((genero)=> genero.type.find((tipo)=> tipo===tipos))
+    } else {
+      pokeFilter = pokemons;
+    }
+    
+    const itemsPaginados = await pagination(pokeFilter);
+    setPoke(itemsPaginados);
   }
 
   function pagination(poks) {
     let pokes = [];
     let tempPoke = [];
     let count = 1; 
-    console.log('poks', poks);
     for(let pokemon of poks) {
-      if (!existPokemon.find((poke) => poke === pokemon.name)) {
+      if (!existPokemon.some((poke) => poke === pokemon.name)) {
         if (count <= 20){
           tempPoke.push(pokemon);
         } else {
@@ -45,9 +88,8 @@ const Pokemon = () => {
         existPokemon.push(pokemon.name);
         count++;
       }
-      // const formPoke = await apiPokemon.get(`-form/${pokemon.name}`)
-      // if (pokemons.some((poke) => poke.name.includes(formPoke.data.name))) return;
     }
+    existPokemon = [];
     return pokes;
   }
 
@@ -60,10 +102,8 @@ const Pokemon = () => {
     if (isExist.length) {
       const remove = favoritos.filter((fav)=>fav.number !== value.number)
       setFavoritos(remove);
-      console.log('eliminado :', value)
     } else {
       setFavoritos([...favoritos,value]);
-      console.log('agregado :', value)
     }
   }
 
@@ -76,7 +116,6 @@ const Pokemon = () => {
       pokemon.name.toLowerCase().includes(value.toLowerCase())
     );
     setBusqueda(pokemonsFill);
-    console.log(value);
   }
 
   useEffect(() => {
@@ -102,6 +141,24 @@ const Pokemon = () => {
       <Title>Pokedex</Title>
       <Grid 
         container
+        spacing={{xs: 2, md: 3}}
+        className="btnCategoria mb-2"
+        >
+        {tipos.map(
+          (tipo) =>
+          <Grid item> 
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={()=>filtroPokemon(tipo)}>
+                {tipo}
+            </Button>
+          </Grid>
+        )}
+      </Grid>
+
+      <Grid 
+        container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
         justifyContent="center">
@@ -118,7 +175,7 @@ const Pokemon = () => {
       </Grid>
       <Grid container justifyContent={'center'}>
         <Grid item>
-          <Pagination
+          <Pagination className="m-2"
             count={pokePaginado.length}
             variant="outlined"
             color="secondary"

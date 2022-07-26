@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import styled2 from 'styled-components';
 import { ImgSearch, Items, Listado, Name } from '../../shared/styles';
 
 const SearchSx = styled('div')(({ theme }) => ({
@@ -53,7 +52,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Search({search, busqueda}) {
     function handleChange(event){
         search(event.target.value);
-        console.log(event);
     }
     return (
         <div>
@@ -67,7 +65,7 @@ export default function Search({search, busqueda}) {
                     onChange={handleChange}
                 />
             </SearchSx>
-            {busqueda.length && <Listado>{busqueda.map((pokemon) => 
+            {busqueda && <Listado>{busqueda.map((pokemon) => 
             <Items>
                 <Name>{pokemon.name}</Name>
                 <ImgSearch src={pokemon.ThumbnailImage} />
