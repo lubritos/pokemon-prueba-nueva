@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import Search from '../search';
+import Fav from '../favorito/fav';
 
 const pages = [
     {
@@ -21,13 +22,27 @@ const pages = [
     {
         label:"pokemon",
         path:"/pokemon"
+    },
+    {
+        label:"Abilities",
+        path:"/Abilities"
+    },
+    {
+        label:"items",
+        path:"/items"
     }
+
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = () => {
+const Navbar = ({
+    favoritos,
+    search,
+    busqueda
+}) => {
 const [anchorElNav, setAnchorElNav] = React.useState(null);
 const [anchorElUser, setAnchorElUser] = React.useState(null);
+
 
 const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,11 +59,11 @@ const handleCloseUserMenu = () => {
     setAnchorElUser(null);
 };
 
+
 return (
-    <AppBar position="static">
+    <AppBar className="bg-red pd-t pd-b f-size-1" position="static">
     <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
                 variant="h6"
                 noWrap
@@ -64,7 +79,7 @@ return (
                 textDecoration: 'none',
                 }}
             >
-                LOGO
+                <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="logo" width={150}/>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
@@ -97,15 +112,14 @@ return (
                 >
                 {pages.map((page) => (
                     <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                        <Link to={page.path}> 
-                            <Typography textAlign="center">{page.label}</Typography>
+                        <Link to={page.path} className="td-none"> 
+                            <Typography textAlign="center" sx={{textDecoration:'none'}}>{page.label}</Typography>
                         </Link>
                     </MenuItem>
                 ))}
                 </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-            <Typography
+            <Typography className="bg-red pd-t pd-b f-size-1" 
                 variant="h5"
                 noWrap
                 component="a"
@@ -121,12 +135,13 @@ return (
                 textDecoration: 'none',
                 }}
             >
-                LOGO
+                <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="logo" width={150}/>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                     <Link key={page.label} to={page.path}>
-                        <Button
+                        <Button 
+                        className='text'
                             key={page.label}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
@@ -137,7 +152,10 @@ return (
                     </Link>
                 ))}
             </Box>
-            <Search/>
+            <Fav favoritos= {favoritos}/>
+            
+            <Search search={search} busqueda={busqueda}/>
+            
         </Toolbar>
     </Container>
     </AppBar>

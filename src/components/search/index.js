@@ -2,6 +2,8 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import styled2 from 'styled-components';
+import { ImgSearch, Items, Listado, Name } from '../../shared/styles';
 
 const SearchSx = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -10,6 +12,7 @@ const SearchSx = styled('div')(({ theme }) => ({
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
+
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -28,6 +31,8 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
+
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
@@ -45,16 +50,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 },
 }));
 
-export default function Search() {
+export default function Search({search, busqueda}) {
+    function handleChange(event){
+        search(event.target.value);
+        console.log(event);
+    }
     return (
-        <SearchSx>
-            <SearchIconWrapper>
-                <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-            />
-        </SearchSx>
+        <div>
+            <SearchSx>
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                    onChange={handleChange}
+                />
+            </SearchSx>
+            {busqueda.length && <Listado>{busqueda.map((pokemon) => 
+            <Items>
+                <Name>{pokemon.name}</Name>
+                <ImgSearch src={pokemon.ThumbnailImage} />
+            </Items>
+            
+            )}</Listado>}
+        </div>
     );
 }
