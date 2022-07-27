@@ -65,13 +65,12 @@ export default function Search({search, busqueda}) {
                     onChange={handleChange}
                 />
             </SearchSx>
-            {busqueda && <Listado>{busqueda.map((pokemon) => 
+            {busqueda.length ? <Listado>{busqueda.map((pokemon) => 
             <Items>
                 <Name>{pokemon.name}</Name>
                 <ImgSearch src={pokemon.ThumbnailImage} />
             </Items>
-            
-            )}</Listado>}
+            )}</Listado> : null}
         </div>
     );
 }

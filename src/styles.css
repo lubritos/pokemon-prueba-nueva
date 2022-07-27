@@ -22,7 +22,8 @@
   background-color: rgba(255,255,255,0.2)!important;
 }
 .dark {
-  background-color: #455a64!important;
+  background:#455a64 url('./assets/images/dark.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .normal {
   background:#b0bec5 url('./assets/images/normal.png') no-repeat bottom right !important;
@@ -37,43 +38,51 @@
   background-size: 160px 160px !important;
 }
 .flying{
-  background-color: #cacfcf!important;
+  background: #cacfcf url('./assets/images/ala.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .rock{
-  background-color: rgba(106, 88, 88, 0.92)!important;
+  background: rgba(106, 88, 88, 0.92) url('./assets/images/stone.png')no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .ice {
-  background-color: #40c4ff !important;
+  background:#40c4ff url('./assets/images/snowflake.png') no-repeat bottom right !important;
+  background-size: 185px 185px !important;
 }
 .fairy {
-  background-color: #e1bee7 !important;
+  background: #e1bee7 url('./assets/images/magic-wand.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .fighting {
   background:#bcaaa4 url('./assets/images/box.png') no-repeat bottom right !important;
   background-size: 175px 175px !important;
 }
 .ground {
-  background-color: #8d6e63 !important;
+  background: #8d6e63 url('./assets/images/ground.png') no-repeat bottom right !important;
+  background-size: 190px 190px !important;
 }
 .dragon {
-  background:#e64a19 url('./assets/images/dragon.png') no-repeat bottom right  !important;
+  background:#e64a19 url('./assets/images/dragon.png') no-repeat bottom right !important;
   background-size: 175px 175px !important;
 }
 .steel {
-  background-color: #78909c !important;
+  background: #78909C url('./assets/images/steel.png') no-repeat bottom right!important;
+  background-size: 175px 175px !important;
 }
 .psychic {
   background:#ffca28 url('./assets/images/psychi.png') no-repeat bottom right !important;
   background-size: 175px 175px !important;
 }
 .ghost {
-  background-color: #607d8b !important;
+  background:#607d8b url('./assets/images/creepy-ghost.png') no-repeat bottom right !important;
+  background-size: 175px 175px !important;
 }
 .btn {
   border-radius: 15px !important;
   padding: 4px 10px !important;
   font-size: 0.7rem !important;
 }
+
 .m-05 {
   margin: 0.5rem 0.5rem 0 0 !important;
 }

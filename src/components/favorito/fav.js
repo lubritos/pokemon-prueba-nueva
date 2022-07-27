@@ -1,4 +1,5 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ const Fav = ({favoritos})=>{
     return (
         <div>
             <FavSx onClick={()=> setShow(!show)}>
-                <FavoriteIcon />
+                {favoritos.length ? <FavoriteIcon /> : <FavoriteBorder/>}
             </FavSx>
             {show && <Listado>
                 {favoritos.length ? 

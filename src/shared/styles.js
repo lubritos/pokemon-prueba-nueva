@@ -1,4 +1,14 @@
+import { Button } from "@mui/material";
 import styled from "styled-components";
+export const TypeButton = styled(Button)`
+    border: ${({sxColor}) => sxColor} solid 1px!important;
+    color: ${({sxColor}) => sxColor}!important;
+
+    &:hover {
+        background: ${({sxColor}) => sxColor}!important;
+        color: #fff!important;
+    }
+`
 
 export const Listado = styled.div`
     display: flex;
