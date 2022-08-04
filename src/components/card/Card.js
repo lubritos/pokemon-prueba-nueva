@@ -8,6 +8,7 @@ import styled from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getColor } from "../../shared/utils";
 
 
 const ImgGroup = styled.div`
@@ -20,6 +21,9 @@ const BtnType = styled.div`
   display: flex;
 `
 
+const IconosCard = styled.div`
+  display:flex;
+`
 
 const CardPokemon = ({
   handleFav,
@@ -31,35 +35,13 @@ const CardPokemon = ({
   ...rest
 }) => {
 
-  function getColor(type) {
-    const color = {
-      'water': 'water',
-      'grass': 'grass',
-      'poison': 'poison',
-      'fire': 'fire',
-      'electric': 'electric',
-      'bug': 'bug',
-      'flying': 'flying',
-      'rock' : 'rock',
-      'dark': 'dark',
-      'normal':'normal',
-      'ice': 'ice',
-      'fairy':'fairy',
-      'fighting':'fighting',
-      'ground': 'ground',
-      'psychic':'psychic',
-      'ghost':'ghost',
-      'dragon':'dragon',
-      'steel': 'steel'
-    }
-    return color[type];
-  }
 
   return (
     <Card 
       className={getColor(type[0])}
       sx={{ display: 'flex', width: 345, height: 225, borderRadius: '2rem' }}
-      data-type={type}>
+      data-type={type}
+      >
       <CardContent sx={{ width: 190 }} >
         <Typography gutterBottom variant="h4" component="div">
           #{number}
@@ -80,13 +62,29 @@ const CardPokemon = ({
         </BtnType>
       </CardContent>
       <ImgGroup>
-        <IconButton sx={{ color: grey[50] }} className = "m-05" onClick={()=> handleFav({
-          number: number,
-          name: name,
-          ThumbnailImage: ThumbnailImage
-        })}>
-          {fav.length ?<FavoriteIcon/>  : <FavoriteBorderIcon/>}
-        </IconButton>
+        <IconosCard>
+            <IconButton>
+              <img src={`${process.env.PUBLIC_URL}/view.png`} 
+              className = "m-05 c-white" 
+              width={30} 
+              onClick={()=>rest.openModal({
+                number: number,
+                name: name,
+                ThumbnailImage: ThumbnailImage,
+                type: type[0],
+                info: rest
+              })}
+              alt=""/>
+            </IconButton>
+            <IconButton sx={{ color: grey[50] }} className = "m-05" onClick={()=> handleFav({
+              number: number,
+              name: name,
+              ThumbnailImage: ThumbnailImage
+            })}>
+              {fav.length ?<FavoriteIcon/>  : <FavoriteBorderIcon/>}
+            </IconButton>
+            
+        </IconosCard>
         <img src={ThumbnailImage} alt={name} height='150' />
       </ImgGroup>
     </Card>

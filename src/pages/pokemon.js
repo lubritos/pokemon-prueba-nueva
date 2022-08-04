@@ -2,10 +2,12 @@ import { Button, Grid, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CardPokemon from "../components/card/Card";
+import ResponsiveModal from "../components/modal/Modal";
 import Navbar from "../components/navbar";
 import Search from "../components/search";
 import apiPokemon, { apiPokemonsKalos } from "../services/pokemons";
 import { TypeButton } from "../shared/styles";
+import { tipos } from "../shared/utils";
 
 const Title = styled.h1`
   display:flex;
@@ -13,91 +15,16 @@ const Title = styled.h1`
   justifi-content:start;
   margin:2rem;
 `
-const tipos = [
-  {
-    label: 'todos',
-    color: '#f10e0e', 
-  },
-  {
-    label: 'normal', 
-    color: '#b0bec5'
-  },
-  {
-    label: 'dark', 
-    color: '#455a64'
-  },
-  {
-    label: 'dragon', 
-    color: '#e64a19'
-  },
-  {
-    label: 'fairy', 
-    color: '#e1bee7'
-  },
-  {
-    label: 'fire', 
-    color: '#FB6C6C'
-  },
-  {
-    label: 'water', 
-    color: '#91CAFE'
-  },
-  {
-    label: 'electric', 
-    color: '#FFD86F'
-  },
-  {
-    label: 'grass', 
-    color: '#48D0B0'
-  },
-  {
-    label: 'poison', 
-    color: '#152ecef1'
-  },
-  {
-    label: 'flying', 
-    color: '#cacfcf'
-  },
-  {
-    label: 'fighting', 
-    color: '#bcaaa4'
-  },
-  {
-    label: 'ground', 
-    color: '#8d6e63 '
-  },
-  {
-    label: 'bug', 
-    color: '#96D47F'
-  },
-  {
-    label: 'rock', 
-    color: 'rgba(106, 88, 88, 0.92)'
-  },
-  {
-    label: 'ice', 
-    color: '#40c4ff'
-  },
-  {
-    label: 'ghost', 
-    color: '#607d8b'
-  },
-  {
-    label: 'steel', 
-    color: '#78909C'
-  },
-  {
-    label: 'psychic ', 
-    color: '#ffca28'
-  },
-] 
+
 
 let existPokemon = [];
 const Pokemon = () => {
   const storePokes = localStorage.getItem('pokePaginado');
+  const [open, setOpen] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [pokePaginado, setPoke] = useState(storePokes ? JSON.parse(storePokes) : []);
   const [pagina , setPagina] = useState(1);
+  const [pokeInfo , setPokeInfo] = useState({});
   const [favoritos, setFavoritos] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
 
@@ -227,6 +154,10 @@ const Pokemon = () => {
               key={pokemon.number}
               handleFav={handleFav}
               fav={favoritos.filter((fav)=>fav.number===pokemon.number)}
+              openModal={(val)=> {
+                setPokeInfo(val);
+                setOpen(true)
+              }}
               />
           </Grid>
         ))}
@@ -240,6 +171,7 @@ const Pokemon = () => {
             onChange={handleChange}/>
         </Grid>
       </Grid>
+      {open && <ResponsiveModal handleClose={()=>setOpen(false)} pokeInfo={pokeInfo} />}
     </div>
   );
 };

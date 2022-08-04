@@ -82,9 +82,14 @@
   padding: 4px 10px !important;
   font-size: 0.7rem !important;
 }
-
+.c-white {
+  color:#ffffff ;
+}
 .m-05 {
   margin: 0.5rem 0.5rem 0 0 !important;
+}
+.w-100 {
+  width: 100%;
 }
 .text {
   color: #ffffff !important;
